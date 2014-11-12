@@ -18,7 +18,7 @@ if (isset($_SESSION['user'])){
 }
 
 echo <<<_END
-        <title>F8L Online Banking</title>
+        <title>F8L Online Banking Test</title>
         <link rel='stylesheet' type='text/css' href='style.css'>
     </head>
     <body>
