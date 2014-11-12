@@ -14,5 +14,7 @@ function getNumberOfAccounts ($userName) {
 	
 	mysql_close($db_connect);
 	return $count;
+	
+	//test
 }
 ?>
