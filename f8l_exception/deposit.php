@@ -19,14 +19,14 @@ include 'includes/inc_validateLogin.php';
 
 function displayForm() {
 ?>
-	<h3>Enter your User Name and Password.</h3>
+	<h3>Enter account number and deposit amount.</h3>
 	<?php 
 	global $errorMessage;
 	echo $errorMessage ?>
-	<form method="POST" action="login.php">
-		<p>User Name <input type="text" name="Login" /></p>
-		<p>Password <input type="password" name="Password" /></p>
-		<p><input type="submit" value="Log in" /></p>
+	<form method="POST" action="deposit.php">
+		<p>Account Number: <input type="text" name="accountNumber" /></p>
+		<p>Deposit Amount: <input type="amount" name="amount" /></p>
+		<p><input type="submit" value="Submit" /></p>
 	</form>
 	<br /><br />
 	

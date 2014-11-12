@@ -21,6 +21,7 @@ function openNewAccount($userName,$balance,$accountType) {
 	global $errorCount;
 	global $errorMessage;
 	include 'includes/inc_dbConnect.php';
+	//echo "Opening a new account with UserName:".$userName." Balance:".$balance." Account Type:".$accountType;
 	
 	// Select database.
 	if ($db_connect === FALSE)
@@ -30,11 +31,10 @@ function openNewAccount($userName,$balance,$accountType) {
 		if (!@mysql_select_db($db_name, $db_connect))
 			echo "<p>Connection error. Please try again later.</p>";
 		else {
-			$today = date("Ymd");
-			$TableName = "account";
-			$SQLstring = "INSERT INTO 
-				$TableName (login,password,firstName,lastName,email,active,dateOpened) 
-				VALUES ('$Login','$Password','$First','$Last','$Email',1,'$today')";
+			//$today = date("Ymd");
+			//echo "sending insert query now.<br />";
+			$SQLstring = "INSERT INTO account (username,balance,accounttype) 
+				VALUES ('$userName','$balance','$accountType')";
 			
 			$QueryResult = @mysql_query($SQLstring, $db_connect);
 		}
@@ -43,57 +43,67 @@ function openNewAccount($userName,$balance,$accountType) {
 	return ($retval);
 }
 
-function displayForm($First, $Last, $Email, $Login) {
+function displayForm() {
 	global $errorMessage;
 	echo $errorMessage;
 	
-	// figure out how to make a checkbox for savings or checking in this form.
 	?>
-	<form name="register" action="register.php" method="post">
-	<p>Initial Deposit: <input type="text" name="balance"  /></p>	
-	<p>Account Type: <input type="text" name="accountType" /></p>
-	
+	<form name="register" action="new_account.php" method="post">
+	<p>Initial Deposit: <input type="text" name="balance"  /></p>
+	<p>Account Type: <input type="radio" name="accountType" value="Checking" checked>Checking
+	<input type="radio" name="accountType" value="Savings">Savings</p>
 	<p><input type="submit" name="Submit" value="Submit" /></p>
 	</form>
 	<br /><br />
-	
 	<?php
-	//include 'includes/inc_text_menu.php';
 }
 
+$showForm = TRUE;
 $errorCount = 0;
 $errorMessage = "";
+$userName = "";
 $userName = $_SESSION['login'];
-$numAccounts = getNumberOfAccounts($userName);
 
-if ($numAccounts > 1)
-	echo "You already have two accounts open. Each user is limited to two accounts.";
+// if not logged in, redirect to login page
+if ($userName == "") {
+	echo "You must be logged in to open a new account.<br /><br />";
+	$showForm = FALSE;
+}
 else {
-	$showForm = TRUE;
-	if (isset($_POST['Submit'])) {
-		$balance  = validateInput($_POST['balance'],"Initial Deposit");
-		$accountType  = validateInput($_POST['accountType'],"Account Type");
-// gotta finish coding all this stuff below.
-		if($Login == $Password) {
-			$errorMessage .= "Password cannot be the same as user name<br />";
-			$errorCount++;
-		}
-		if ($errorCount == 0)
-			$showForm = FALSE;
-		else
-			$showForm = TRUE;
+	// check if user has already opened 2-account limit
+	$numAccounts = getNumberOfAccounts($userName);
+	if ($numAccounts > 1) {
+		echo "You already have two accounts open. Each user is limited to two accounts.<br />";
+		$showForm = FALSE;
 	}
 
-	if ($showForm == TRUE) {
-		if ($errorCount > 0) // if there were errors
-			$errorMessage .= "<p>Please re-enter the form information below.</p>\n";
-		displayForm ();
-	}
 	else {
-		// create account in db
-		createNewAccount($userName,$balance,$accountType);
+		echo "User Name: ".$userName."<br />";
+		
+		if (isset($_POST['Submit'])) {
+			$balance  = validateInput($_POST['balance'],"Initial Deposit");
+			$accountType  = $_POST['accountType'];
+	
+			if($balance < 0) {
+				$errorMessage .= "You cannot open a new account with a negative balance.<br />";
+				$errorCount++;
+			}
+			if ($errorCount == 0)
+				$showForm = FALSE;
+			else
+				$showForm = TRUE;
+		}
 
-		echo "<p>Your account has been created!.</p><br /><br />\n";
+		if ($showForm == TRUE) {
+			if ($errorCount > 0) // if there were errors
+				$errorMessage .= "<p>Please re-enter the form information below.</p>\n";
+			displayForm ();
+		}
+		else {
+			// create account in db		
+			openNewAccount($userName,$balance,$accountType);
+			echo "<p>Your account has been created!.</p><br /><br />\n";
+		}
 	}
 }
 include 'includes/inc_text_menu.php';

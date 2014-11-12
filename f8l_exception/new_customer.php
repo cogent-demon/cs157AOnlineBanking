@@ -31,8 +31,6 @@ function createNewCustomer($userName,$pw,$email) {
 		if (!@mysql_select_db($db_name, $db_connect))
 			echo "<p>Connection error. Please try again later.</p>";
 		else {
-			$errorMessage .= "Inserting new user into db.";
-			echo "Inserting new user into db. $userName $pw $email";
 			$SQLstring = "INSERT INTO 
 				user (username,password,email) 
 				VALUES ('$userName','$pw','$email')";
