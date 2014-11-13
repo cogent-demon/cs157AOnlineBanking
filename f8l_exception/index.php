@@ -18,6 +18,7 @@ session_start(); ?>
 <p>What? You're looking for a secure and reliable online bank to stash your cash in that won't bury you with fees? The F8L Exception Online Bank has it all.
 It is free, quick and easy to set up an account, and you can access all your funds conveniently online.</p>
 <br />
+<p>This is a test.</p>
 <?php
 include 'includes/inc_text_menu.php';
 ?>
