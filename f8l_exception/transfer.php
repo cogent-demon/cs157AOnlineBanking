@@ -1,15 +1,15 @@
 <?php
 session_start(); ?>
-<!-- F8L Exception Online Bank | Deposit -->
+<!-- F8L Exception Online Bank | Transfer -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>F8L Exception Online Bank | Deposit</title>
+	<title>F8L Exception Online Bank | Transfer</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<?php include 'includes/inc_header.php'; ?>
-	<h1>Deposit</h1><hr />
+	<h1>Transfer</h1><hr />
 </head>
 <body>
 
@@ -17,7 +17,7 @@ session_start(); ?>
 include 'includes/inc_validateInput.php';
 include 'includes/inc_validateLogin.php';
 
-function deposit($userName,$accountId,$amount) {
+function transfer($userName,$fromAccountId,$toAccountId,$amount) {
 	global $errorCount;
 	global $errorMessage;
 	include 'includes/inc_dbConnect.php';
@@ -34,16 +34,18 @@ function deposit($userName,$accountId,$amount) {
 		}	
 		else {
 			// verify the account belongs to the user
-			$sql = "SELECT * FROM account WHERE username='$userName' and accountid='$accountId'";
+			$sql = "SELECT * FROM account WHERE username='$userName' and accountid='$fromAccountId'";
 			$result = mysql_query($sql);
 
-			// If result matched $myusername and $mypassword, table row must be 1 row
+			// If result matched $myusername and $accountId, table rows must be 1 row
 			$count = mysql_num_rows($result);
 			if($count == 1){
-				// record login to login_history table
-				$sql2 = "UPDATE account SET balance=balance+'$amount' WHERE username='$userName' and accountid='$accountId'";
+				// record transfer to both accounts
+				$sql2 = "UPDATE account SET balance=balance-'$amount' WHERE username='$userName' and accountid='$fromAccountId'";
 				$result = mysql_query($sql2);
-				$errorMessage .= "<p>Deposit completed.</p>";
+				$sql3 = "UPDATE account SET balance=balance+'$amount' WHERE accountid='$toAccountId'";
+				$result = mysql_query($sql3);
+				$errorMessage .= "<p>Transfer completed.</p>";
 			}
 			else {
 				$errorCount++;
@@ -56,13 +58,14 @@ function deposit($userName,$accountId,$amount) {
 
 function displayForm() {
 ?>
-	<h3>Enter account number and deposit amount.</h3>
+	<h3>Enter from account number, to account number and transfer amount.</h3>
 	<?php 
 	global $errorMessage;
 	echo $errorMessage ?>
-	<form method="POST" action="deposit.php">
-		<p>Account Number: <input type="text" name="accountNumber" /></p>
-		<p>Deposit Amount: <input type="amount" name="amount" /></p>
+	<form method="POST" action="transfer.php">
+		<p>From Account Number: <input type="text" name="fromAccountNumber" /></p>
+		<p>To Account Number: <input type="text" name="toAccountNumber" /></p>
+		<p>Transfer Amount: <input type="amount" name="amount" /></p>
 		<p><input type="submit" name="Submit" value="Submit" /></p>
 	</form>
 	<br /><br />
@@ -73,7 +76,8 @@ function displayForm() {
 $showForm = TRUE;
 $errorCount = 0;
 $errorMessage = "";
-$accountNumber = 0;
+$fromAccountNumber = 0;
+$toAccountNumber = 0;
 $amount = 0;
 $userName = "";
 $userName = $_SESSION['login'];
@@ -81,8 +85,13 @@ echo "User Name: ".$userName."<br />";
 
 // if submit button is clicked, get accountNumber and amount
 if (isset($_POST['Submit'])) {
-	$accountNumber  = validateInput($_POST['accountNumber'],"Account Number");
-	$amount  = validateInput($_POST['amount'],"Deposit Amount");
+	$fromAccountNumber  = validateInput($_POST['fromAccountNumber'],"From Account Number");
+	$toAccountNumber  = validateInput($_POST['toAccountNumber'],"To Account Number");
+	$amount  = validateInput($_POST['amount'],"Transfer Amount");
+	if ($amount <= 0) {
+		$errorMessage .= "Invalid amount.<br />";
+		$errorCount++;
+	}
 	
 	if ($errorCount == 0)
 		$showForm = FALSE;
@@ -99,8 +108,8 @@ else {
 	if ($showForm == TRUE) {
 		displayForm();		// new page load
 	}
-	else {					// make deposit
-		deposit($userName,$accountNumber,$amount);
+	else {					// make transfer
+		transfer($userName,$fromAccountNumber,$toAccountNumber,$amount);
 		echo $errorMessage."<br />";
 	}
 }
