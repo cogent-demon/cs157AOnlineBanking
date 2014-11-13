@@ -9,7 +9,6 @@ session_start(); ?>
 	<title>F8L Exception Online Bank | Home</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<?php include 'includes/inc_header.php'; ?>
-	<h1>Welcome to F8L Exception Online Bank!</h1><hr />
 </head>
     
 <?php
@@ -22,14 +21,15 @@ if (isset($_SESSION['user'])){
 }
 
 if ($loggedin){
-    include 'includes/inc_text_menu.php';
-} else {
     include 'includes/inc_loggedin_text_menu.php';
+} else {
+    include 'includes/inc_text_menu.php';
 }
 ?>
     
 <body>
-
+<hr />
+<h1>Welcome to F8L Exception Online Bank!</h1>
 <h3>Secure online banking with zero fees</h3>
 <img src="artwork/vault.jpg" />
 <p>What? You're looking for a secure and reliable online bank to stash your cash in that won't bury you with fees? The F8L Exception Online Bank has it all.
