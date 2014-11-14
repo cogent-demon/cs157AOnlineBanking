@@ -1,6 +1,6 @@
 <?php
 function showAccounts($userName) {
-	include($_SERVER['DOCUMENT_ROOT']."/f8l_exception/includes/inc_dbConnect.php");
+	include f8l_exception/includes/inc_dbConnect.php;
 	// Select database.
 	if ($db_connect === FALSE)
 		echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";

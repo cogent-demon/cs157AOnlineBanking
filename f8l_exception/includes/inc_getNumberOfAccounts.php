@@ -4,7 +4,7 @@
 function getNumberOfAccounts ($userName) {
 	global $errorCount;
 	global $errorMessage;
-	include($_SERVER['DOCUMENT_ROOT']."/f8l_exception/includes/inc_dbConnect.php");
+	include f8l_exception/includes/inc_dbConnect.php;
 	mysql_select_db("$db_name")or die("cannot select DB");
 
 	// get number of accounts
