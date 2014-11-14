@@ -1,5 +1,5 @@
 <?php
-session_start(); ?>
+//session_start(); ?>
 <!-- F8L Exception Online Bank | Home -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -10,22 +10,6 @@ session_start(); ?>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<?php include 'includes/inc_header.php'; ?>
 </head>
-    
-<?php
-if (isset($_SESSION['user'])){
-    $user       = $_SESSION['user'];
-    $loggedin   = TRUE;
-    $userstr    = " ($user)";
-} else {
-    $loggedin   = FALSE;
-}
-
-if ($loggedin){
-    include 'includes/inc_loggedin_text_menu.php';
-} else {
-    include 'includes/inc_text_menu.php';
-}
-?>
     
 <body>
 <hr />

@@ -1,5 +1,3 @@
-<?php
-session_start(); ?>
 <!-- F8L Exception Online Bank | New Customer -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -8,11 +6,14 @@ session_start(); ?>
 <head>
 	<title>F8L Exception Online Bank | Register a New Customer</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-	<?php include 'includes/inc_header.php'; ?>
-	<h1>Register a New Customer</h1><hr />
+	<?php 
+        include 'includes/inc_header.php'; 
+        ?>
+	
 </head>
 <body>
-
+        <hr />
+        <h1>Register a New Customer</h1>
 <?php
 include 'includes/inc_validatePassword.php';
 include 'includes/inc_validateUserName.php';
@@ -57,7 +58,7 @@ function displayForm($userName,$email) {
 	<br /><br />
 	
 	<?php
-	include 'includes/inc_text_menu.php';
+	
 }
 
 $showForm = TRUE;
@@ -106,7 +107,6 @@ else {
     mail($email,$subject,$message,"From: $from\n");
 	
     echo "<p>You have been set up as a new customer. Welcome to F8L Exception Online Bank!.</p><br /><br />\n";
-	include 'includes/inc_text_menu.php';
 }	
 ?>
 

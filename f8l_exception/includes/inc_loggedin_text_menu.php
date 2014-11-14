@@ -6,10 +6,10 @@
 <a href="my_accounts.php">My Accounts</a> |  
 <a href="deposit.php">Deposit</a> | 
 <a href="withdraw.php">Withdraw</a> |
-<a href="ransfer.php">Transfer</a> |
+<a href="transfer.php">Transfer</a> |
 <a href="view_statement.php">View Statement</a> 
 <br />
 <a href="new_loan.php">New Loan</a> |
-<a href="ew_account.php">New Account</a> |
+<a href="new_account.php">New Account</a> |
 <a href="loan_payment.php">Make Loan Payment</a> 
 <br />

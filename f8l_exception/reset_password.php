@@ -1,5 +1,3 @@
-<?php
-session_start(); ?>
 <!-- F8L Exception Online Bank | Reset Password -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -9,10 +7,11 @@ session_start(); ?>
 	<title>F8L Exception Online Bank | Reset Password</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<?php include 'includes/inc_header.php'; ?>
-	<h1>Reset Password</h1><hr />
+	
 </head>
 <body>
-
+        <hr />
+        <h1>Reset Password</h1>
 <?php
 include 'includes/inc_generatePassword.php';
 include 'includes/inc_validateInput.php';
@@ -67,7 +66,6 @@ function displayForm() {
 	<br /><br />
 	
 	<?php
-	include 'includes/inc_text_menu.php';
 }
 
 $ShowForm = TRUE;

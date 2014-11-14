@@ -1,5 +1,5 @@
 <?php
-session_start(); ?>
+//session_start(); ?>
 <!-- F8L Exception Online Bank | Login -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -8,11 +8,14 @@ session_start(); ?>
 <head>
 	<title>F8L Exception Online Bank | Login</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-	<?php include 'includes/inc_header.php'; ?>
-	<h1>Login</h1><hr />
+	<?php
+        include 'includes/inc_header.php'; 
+        ?>
+	
 </head>
 <body>
-
+        <hr />
+        <h1>Login</h1>
 <?php
 include 'includes/inc_validateInput.php';
 include 'includes/inc_validateLogin.php';
@@ -31,7 +34,7 @@ function displayForm() {
 	<br /><br />
 	
 	<?php
-	include 'includes/inc_text_menu.php';
+	
 }
 
 $ShowForm = TRUE;

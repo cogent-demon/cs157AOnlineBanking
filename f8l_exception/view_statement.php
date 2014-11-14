@@ -1,5 +1,3 @@
-<?php
-session_start(); ?>
 <!-- F8L Exception Online Bank | View Statement -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -9,10 +7,11 @@ session_start(); ?>
 	<title>F8L Exception Online Bank | View Statement</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<?php include 'includes/inc_header.php'; ?>
-	<h1>View Statement -- Under construction</h1><hr />
+	
 </head>
 <body>
-
+        <hr />
+        <h1>View Statement -- Under construction</h1>
 <?php
 function displayTable() {
 	global $Login;
@@ -71,7 +70,6 @@ function displayTable() {
 			mysql_free_result($QueryResult);
 		}	
 	}
-	include 'includes/inc_text_menu.php';
 }
 $Login = "";
 $Login = $_SESSION['login'];

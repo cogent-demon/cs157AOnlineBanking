@@ -1,0 +1,49 @@
+F8L Exception -- 15 Functions:
+
+1.	Add New User
+	Add New Account (checking/savings)
+	Add New Loan
+	Add New CreditCard
+	
+2.	Change Password
+	Reset Password
+
+3.	View Account Statement (checking/savings)
+
+4. 	Overdraft Fee (Trigger)
+	charge $25 fee if balance dips below zero
+	
+5.	ATM Fee (Trigger)
+	charge $3 fee every time function ATMwithdraw is used
+	
+6.	Late Payment (Trigger)
+	charge $10 fee for every late payment
+	
+7.	Low Balance (Admin - Stored Procedure)
+	generate a list of users with accounts that have balances <$20
+	
+8.	Daily Login (Admin - Stored Procedure)
+	generate a list of users who logged in today
+	
+9.	Loyalty Program (Admin - Stored Procedure)
+	generate a list of users with more than $10,000 combined balance 
+	and have been customer for over 1 year
+	
+10.	Annual Credit Card Fee (Trigger)
+	charge a $20 per year fee to all credit card accounts
+	
+11.	No cc w/ $> (Admin)
+	examines all accounts.
+	if account is greater than $5,000, offer a credit card.
+
+12.	Archive Transaction table (Stored Procedure)
+	manually run a procedure that archives transactions older than 7 days
+	
+13.	Delete Inactive Checking/Savings Accounts (Admin)
+	delete all Ch/Sa accounts that have $0 balance and have not been accessed in 60 days
+	this delete will cascade through the Transactions table
+
+14.	Increase Credit Card Limit (Admin)
+
+15.	Daily Transactions Tally (Admin)
+	show the sum of all deposits and withdraws for one day

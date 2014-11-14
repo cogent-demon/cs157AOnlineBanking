@@ -1,5 +1,3 @@
-<?php
-session_start(); ?>
 <!-- F8L Exception Online Bank | Open New Account -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -9,10 +7,11 @@ session_start(); ?>
 	<title>F8L Exception Online Bank | Open New Account</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<?php include 'includes/inc_header.php'; ?>
-	<h1>Open a New Account</h1><hr />
+	
 </head>
 <body>
-
+        <hr />
+        <h1>Open a New Account</h1>
 <?php
 include 'includes/inc_validateInput.php';
 include 'includes/inc_getNumberOfAccounts.php';
@@ -106,7 +105,6 @@ else {
 		}
 	}
 }
-include 'includes/inc_text_menu.php';
 ?>
 
 </body>

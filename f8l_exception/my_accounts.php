@@ -1,5 +1,3 @@
-<?php
-session_start(); ?>
 <!-- F8L Exception Online Bank | My Accounts -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -9,10 +7,11 @@ session_start(); ?>
 	<title>F8L Exception Online Bank | My Accounts</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<?php include 'includes/inc_header.php'; ?>
-	<h1>My Accounts</h1><hr />
+	
 </head>
 <body>
-
+        <hr />
+        <h1>My Accounts</h1>
 <?php
 function showAccounts($userName) {
 	include 'includes/inc_dbConnect.php';
@@ -55,8 +54,6 @@ $userName = "";
 $userName = $_SESSION['login'];
 echo "User Name: ".$userName."<br />";
 showAccounts($userName);
-
-include 'includes/inc_text_menu.php';
 
 ?>
 

@@ -1,5 +1,3 @@
-<?php
-session_start(); ?>
 <!-- PVault | Logout -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -15,7 +13,6 @@ session_start(); ?>
 	session_unset(); 
 	session_destroy();
 	?><script language="JavaScript">window.location = "index.php";</script><?php
-	include 'includes/inc_text_menu.php';
 ?>
 
 </body>

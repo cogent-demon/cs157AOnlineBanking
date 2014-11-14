@@ -1,5 +1,3 @@
-<?php
-session_start(); ?>
 <!-- F8L Exception Online Bank | New Loan -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
@@ -9,10 +7,11 @@ session_start(); ?>
 	<title>F8L Exception Online Bank | New Loan</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<?php include 'includes/inc_header.php'; ?>
-	<h1>New Loan -- Under construction</h1><hr />
+	
 </head>
 <body>
-
+        <hr />
+        <h1>New Loan -- Under construction</h1>
 <?php
 include 'includes/inc_validatePassword.php';
 include 'includes/inc_validateEmail.php';
@@ -61,7 +60,6 @@ function displayForm($First, $Last, $Email, $Login) {
 	<br /><br />
 	
 	<?php
-	include 'includes/inc_text_menu.php';
 }
 
 $showForm = TRUE;
@@ -116,7 +114,6 @@ else {
     mail($Email,$subject,$message,"From: $from\n");
 	
     echo "<p>" . $First . "\nyour account has been created. Welcome to PVault!.</p><br /><br />\n";
-	include 'includes/inc_text_menu.php';
 }	
 ?>
 
