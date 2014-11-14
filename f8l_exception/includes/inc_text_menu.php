@@ -1,7 +1,7 @@
 <br />
-<a href="f8l_exception/index.php">Home</a> |
-<a href="f8l_exception/new_customer.php">New Customer</a> |
-<a href="f8l_exception/login.php">Login</a>
+<a href="index.php">Home</a> |
+<a href="new_customer.php">New Customer</a> |
+<a href="login.php">Login</a>
 <br />  
 
-<a href="f8l_exception/admin.php">Admin</a>
+<a href="admin.php">Admin</a>
