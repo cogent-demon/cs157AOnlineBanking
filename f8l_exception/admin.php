@@ -19,7 +19,7 @@ echo <<<_END
     <h1>Admin Login</h1>
     
 _END;
- 
+
 global $errorMessage;
 $errorCount = 0;
 $errorMessage = $userName = $password = "";
