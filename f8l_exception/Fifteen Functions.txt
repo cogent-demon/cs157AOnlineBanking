@@ -47,3 +47,14 @@ F8L Exception -- 15 Functions:
 
 15.	Daily Transactions Tally (Admin)
 	show the sum of all deposits and withdraws for one day
+	
+STORED PROCEDURE
+DROP PROCEDURE IF EXISTS getLowBalance;
+DELIMITER //
+CREATE PROCEDURE getLowBalance()
+BEGIN
+SELECT username, acctype, balance
+FROM account
+where balance <= 200;
+END //
+DELIMITER;

@@ -13,9 +13,27 @@
         <hr />
         <h1>My Accounts</h1>
 <?php
+include 'functions.php';
 function showAccounts($userName) {
-	include 'includes/inc_dbConnect.php';
 	// Select database.
+        $result = queryMysql("SELECT * from account WHERE username='$userName'");
+        if ($result->num_rows == 0){
+            echo "<p>You have no accounts open.</p>";
+        } else {
+            echo "<table width='50%' border='1'>";
+            echo "<tr>
+                    <th>Account Type</th>
+                    <th>Account Number</th>
+                    <th>Balance</th>
+                    </tr>";
+            $num = $result->num_rows;
+            for ($j = 0; $j < $num; $j++){
+                $row = $result->fetch_array(MYSQLI_ASSOC);
+                echo "<tr><td>" . $row['username'] . "</td><td>" . $row['acctype'] . "</td><td>$ " . number_format($row['balance'], 2, '.', ',') . "</td></tr>";
+            }
+            $result->close();
+        }
+        /*
 	if ($db_connect === FALSE)
 		echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
 		
@@ -23,9 +41,11 @@ function showAccounts($userName) {
 		if (!@mysql_select_db($db_name, $db_connect))
 			echo "<p>Connection error. Please try again later.</p>";
 		else {
+         * 
+         *
 			$SQLstring = "SELECT * from account 
 				WHERE username='$userName'";
-			
+	*		
 			$QueryResult = @mysql_query($SQLstring, $db_connect);
 			if (mysql_num_rows($QueryResult) == 0)
 				echo "<p>You have no accounts open.</p>";
@@ -36,6 +56,9 @@ function showAccounts($userName) {
 					<th>Account Number</th>
 					<th>Balance</th>
 					</tr>";
+         * 
+         *
+        
 				while (($Row = mysql_fetch_assoc($QueryResult)) !== FALSE) 
 				{
 					echo "<td>{$Row['accounttype']}</td>";
@@ -47,7 +70,9 @@ function showAccounts($userName) {
 		}
 		mysql_close($db_connect);
 	}
-	return ($retval);
+         * 
+         */
+	//return ($retval);
 }
 
 $userName = "";

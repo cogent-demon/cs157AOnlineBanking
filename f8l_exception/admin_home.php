@@ -34,6 +34,7 @@ if (isset($_POST['view'])){
 
     if ($_POST['view'] == 'lowBalance'){
         echo <<<_END
+    <h2 class='tabletitle'>LOW BALANCE</h2>
     <table>
         <tr>
             <th>Username</th>
@@ -43,9 +44,26 @@ if (isset($_POST['view'])){
 _END;
         viewLowBalance();
     } elseif ($_POST['view'] == 'increaseLimit'){
-        echo "increase limit!";
+        echo <<<_END
+    <h2 class='tabletitle'>INCREASE CREDIT CARD LIMIT</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Max Limit</th>
+            <th>Checking Balance</th>
+        </tr>
+_END;
+        increaseLimit();
     } elseif ($_POST['view'] == 'offerCredit'){
-        echo "offer a credit card!";
+        echo <<<_END
+    <h2 class='tabletitle'>OFFER CREDIT CARD</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Balance</th>
+        </tr>
+_END;
+        offerCredit();
     }
 echo <<<_END
     </table>
@@ -58,5 +76,9 @@ function viewLowBalance(){
 
 function increaseLimit(){
     increaseCCLimit();
+}
+
+function offerCredit(){
+    offerCC();
 }
 ?>
