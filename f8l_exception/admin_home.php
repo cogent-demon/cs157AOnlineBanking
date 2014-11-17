@@ -1,5 +1,7 @@
 <?php
 include 'includes/inc_header.php'; 
+include 'includes/inc_adminFunctions.php'; 
+
 echo <<<_END
     <!-- F8L Exception Online Bank | Admin Home -->
 
@@ -29,16 +31,32 @@ echo <<<_END
 _END;
 
 if (isset($_POST['view'])){
+
     if ($_POST['view'] == 'lowBalance'){
-        echo "low balance!";
+        echo <<<_END
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Account Type</th>
+            <th>Balance</th>
+        </tr>
+_END;
+        viewLowBalance();
     } elseif ($_POST['view'] == 'increaseLimit'){
         echo "increase limit!";
     } elseif ($_POST['view'] == 'offerCredit'){
         echo "offer a credit card!";
     }
+echo <<<_END
+    </table>
+_END;
 } 
 
 function viewLowBalance(){
-    
+    lowBalance();
+}
+
+function increaseLimit(){
+    increaseCCLimit();
 }
 ?>

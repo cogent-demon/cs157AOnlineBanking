@@ -19,8 +19,8 @@ F8L Exception -- 15 Functions:
 6.	Late Payment (Trigger)
 	charge $10 fee for every late payment
 	
-7.	Low Balance (Admin - Stored Procedure)
-	generate a list of users with accounts that have balances <$20
+7.	Low Balance (Admin - Stored Procedure) - DONE
+	generate a list of users with accounts that have balances <$200
 	
 8.	Daily Login (Admin - Stored Procedure)
 	generate a list of users who logged in today
