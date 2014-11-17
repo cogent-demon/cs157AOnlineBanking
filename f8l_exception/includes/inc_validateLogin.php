@@ -4,7 +4,7 @@
 function validateLogin ($myusername,$mypassword) {
 	global $errorCount;
 	global $errorMessage;
-	include includes/inc_dbConnect.php;
+	include 'includes/inc_dbConnect.php';
 	mysql_select_db("$db_name")or die("cannot select DB");
 
 	// To protect MySQL injection (more detail about MySQL injection)

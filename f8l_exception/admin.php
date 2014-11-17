@@ -1,4 +1,5 @@
 <?php
+include 'functions.php';
 include 'includes/inc_header.php'; 
 include 'includes/inc_validateInput.php';
 include 'includes/inc_validateLogin.php';
@@ -23,22 +24,27 @@ _END;
 global $errorMessage;
 $errorCount = 0;
 $errorMessage = $userName = $password = "";
-
+$result=$num="";
 if (isset($_POST['Submit'])){
-    $userName  = validateInput($_POST['userName'],"User Name");
-    $password  = validateInput($_POST['password'],"Password");
-    
-    //Check if there is an error on userName and/or password. If not, go to admin home page.
-    if ($errorMessage != ""){
-        header("Location: http://mywebsite.localdomain/cs157a/cs157AOnlineBanking/f8l_exception/admin_home.php");
-        exit();
+    $userName  = validateInput($_POST['user'],"User Name");
+    $password  = validateInput($_POST['pass'],"Password");
+    //Check if there is an error on userName and/or password.
+    if ($errorMessage == ""){
+        $result = queryMySQL("SELECT username,password FROM Users WHERE username='$userName' AND password='$password'");
+        $num = $result->num_rows;
+        
+        if ($result->num_rows == 0)
+                $errorMessage = "Username/Password invalid";
+        else{
+            header("Location: http://mywebsite.localdomain/cs157a/cs157AOnlineBanking/f8l_exception/admin_home.php");
+            exit();
+        }
     }
 }
-
 echo <<<_END
-    <form method="POST" action="admin.php">$errorMessage
-	<p>User Name <input type="text" name="userName" /></p>
-	<p>Password <input type="password" name="password" /></p>
+   <form method="POST" action="admin.php">$errorMessage
+	<p>User Name <input type="text" name="user" /></p>
+	<p>Password <input type="password" name="pass" /></p>
 	<p><input type="submit" name="Submit" value="Log in" /></p>
     </form>
 _END;
