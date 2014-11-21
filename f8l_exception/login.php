@@ -1,5 +1,3 @@
-<?php
-//session_start(); ?>
 <!-- F8L Exception Online Bank | Login -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 

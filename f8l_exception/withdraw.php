@@ -19,14 +19,26 @@ include 'includes/inc_validateLogin.php';
 function Withdraw($userName,$accountId,$amount) {
 	global $errorCount;
 	global $errorMessage;
-	include 'includes/inc_dbConnect.php';
-		
+        global $connection;
 	// Select database.
-	if ($db_connect === FALSE) {
-		$errorMessage .= "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
-		$errorCount++;
-	}	
-	else {
+        if ($connection->connect_error){
+            echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
+            $errorCount++;
+        } else {
+            // verify the account belongs to the user
+            $query = "SELECT * FROM account WHERE username='$userName' and accID='$accountId'";
+            $result = queryMysql($query);
+            $count = $result->num_rows;
+            
+            if ($count == 1){
+                $sql2 = "UPDATE account SET balance=balance-'$amount' WHERE username='$userName' and accID='$accountId'";
+                $result = queryMysql($sql2);
+                $errorMessage .= "<p>Withdraw completed.</p>";
+            } else {
+                $errorCount++;
+		$errorMessage .= "Invalid user name/account number.<br />";
+            }
+            /*
 		if (!@mysql_select_db($db_name, $db_connect)) {
 			$errorMessage .= "<p>Connection error. Please try again later.</p>";
 			$errorCount++;
@@ -49,7 +61,8 @@ function Withdraw($userName,$accountId,$amount) {
 				$errorMessage .= "Invalid user name/account number.<br />";
 			}
 		}
-		mysql_close($db_connect);
+             * 
+             */
 	}
 }
 

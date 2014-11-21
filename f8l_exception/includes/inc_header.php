@@ -10,7 +10,7 @@ if (isset($_SESSION['login'])){
 } else {
     $loggedin   = FALSE;
 }
-$loggedin = FALSE;
+//$loggedin = FALSE;
 if ($loggedin){
     include 'includes/inc_loggedin_text_menu.php';
 } else {

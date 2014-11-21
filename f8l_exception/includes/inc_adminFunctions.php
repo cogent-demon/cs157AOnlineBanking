@@ -21,13 +21,16 @@ function offerCC(){
 }
 
 function increaseCCLimit(){
-    $result = queryMysql("SELECT account.username, account.balance, creditcard.maxlimit from account,creditcard WHERE (account.acctype = 'checking' and "
+    //$result = queryMysql("SELECT account.username, account.balance, creditcard.maxlimit, account.acctype from account,creditcard WHERE (account.acctype = 'checking' and "
+    //        . "account.balance > 2 * creditcard.maxlimit and account.username = creditcard.username)");
+    $result = queryMysql("SELECT account.username, account.balance, creditcard.maxlimit, account.acctype from account,creditcard WHERE ("
             . "account.balance > 2 * creditcard.maxlimit and account.username = creditcard.username)");
+    
     $num = $result->num_rows;
     for ($j = 0; $j < $num; $j++){
         $row = $result->fetch_array(MYSQLI_ASSOC);
         echo "<tr><td>" . $row['username'] . "</td><td>$ " . number_format($row['maxlimit'], 2, '.', ',') . 
-                "</td><td>$ " . number_format($row['balance']) . "</td></tr>";
+                "</td><td>$ " . number_format($row['balance'], 2, '.', ',') . "</td><td>" . $row['acctype'] . "</td></tr>";
     }
 }
 ?>

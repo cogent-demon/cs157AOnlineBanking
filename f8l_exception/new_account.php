@@ -19,10 +19,17 @@ include 'includes/inc_getNumberOfAccounts.php';
 function openNewAccount($userName,$balance,$accountType) {
 	global $errorCount;
 	global $errorMessage;
-	include 'includes/inc_dbConnect.php';
-	//echo "Opening a new account with UserName:".$userName." Balance:".$balance." Account Type:".$accountType;
-	
+        global $connection;
+
 	// Select database.
+        if ($connection->connect_error)
+            echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
+        else {
+            $SQLstring = "INSERT INTO account (username,balance,acctype) 
+				VALUES ('$userName','$balance','$accountType')";
+            $result = queryMysql($SQLstring);
+        }
+        /*
 	if ($db_connect === FALSE)
 		echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
 		
@@ -32,7 +39,7 @@ function openNewAccount($userName,$balance,$accountType) {
 		else {
 			//$today = date("Ymd");
 			//echo "sending insert query now.<br />";
-			$SQLstring = "INSERT INTO account (username,balance,accounttype) 
+			$SQLstring = "INSERT INTO account (username,balance,acctype) 
 				VALUES ('$userName','$balance','$accountType')";
 			
 			$QueryResult = @mysql_query($SQLstring, $db_connect);
@@ -40,6 +47,8 @@ function openNewAccount($userName,$balance,$accountType) {
 		mysql_close($db_connect);
 	}
 	return ($retval);
+         * 
+         */
 }
 
 function displayForm() {

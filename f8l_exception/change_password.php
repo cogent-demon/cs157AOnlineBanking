@@ -21,9 +21,17 @@ include 'includes/inc_validateLogin.php';
 
 function changePassword($userName,$oldPassword,$newPassword) {
 	global $errorCount;
-	include 'includes/inc_dbConnect.php';
+	global $connection;
+        
+        //include 'includes/inc_dbConnect.php';
 	
 	// Select database.
+        if ($connection->connect_error)
+            echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
+        else {
+            $result = queryMysql("UPDATE users SET password='$newPassword' WHERE username='$userName'");
+        }
+        /*
 	if ($db_connect === FALSE)
 		echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
 		
@@ -37,6 +45,8 @@ function changePassword($userName,$oldPassword,$newPassword) {
 		mysql_close($db_connect);
 	}
 	return ($retval);
+         * 
+         */
 }
 
 function displayForm($userName) {
@@ -92,7 +102,7 @@ else {
 	// change password in db
 	changePassword($userName,$oldPassword,$newPassword);
     echo "<p>\nPassword has been changed!.</p><br /><br />\n";
-	include 'includes/inc_text_menu.php';
+	//include 'includes/inc_text_menu.php';
 }	
 ?>
 

@@ -50,7 +50,8 @@ _END;
         <tr>
             <th>Username</th>
             <th>Max Limit</th>
-            <th>Checking Balance</th>
+            <th>Balance</th>
+            <th>Account Type</th>
         </tr>
 _END;
         increaseLimit();

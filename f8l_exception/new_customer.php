@@ -15,6 +15,7 @@
         <hr />
         <h1>Register a New Customer</h1>
 <?php
+
 include 'includes/inc_validatePassword.php';
 include 'includes/inc_validateUserName.php';
 include 'includes/inc_validateEmail.php';
@@ -22,25 +23,11 @@ include 'includes/inc_validateEmail.php';
 function createNewCustomer($userName,$pw,$email) {
 	global $errorCount;
 	global $errorMessage;
-	include 'includes/inc_dbConnect.php';
 	
 	// Select database.
-	if ($db_connect === FALSE)
-		echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
-		
-	else {
-		if (!@mysql_select_db($db_name, $db_connect))
-			echo "<p>Connection error. Please try again later.</p>";
-		else {
-			$SQLstring = "INSERT INTO 
-				user (username,password,email) 
-				VALUES ('$userName','$pw','$email')";
-			
-			$QueryResult = @mysql_query($SQLstring, $db_connect);
-		}
-		mysql_close($db_connect);
-	}
-	return ($retval);
+        $result = queryMysql("INSERT INTO 
+                    users (username,password,email) 
+                    VALUES ('$userName','$pw','$email')");
 }
 
 function displayForm($userName,$email) {
@@ -103,8 +90,9 @@ else {
     $message = "You have successfully registered as a new customer for F8L Exception Online Bank. We hope you will enjoy our service and our lack of fees!\n\nThe F8L Exception Online Bank";
     // message lines should not exceed 70 characters (PHP rule), so wrap it
     $message = wordwrap($message, 70);
+    
     // send mail
-    mail($email,$subject,$message,"From: $from\n");
+    //mail($email,$subject,$message,"From: $from\n");
 	
     echo "<p>You have been set up as a new customer. Welcome to F8L Exception Online Bank!.</p><br /><br />\n";
 }	

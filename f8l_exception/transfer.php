@@ -19,39 +19,32 @@ include 'includes/inc_validateLogin.php';
 function transfer($userName,$fromAccountId,$toAccountId,$amount) {
 	global $errorCount;
 	global $errorMessage;
-	include 'includes/inc_dbConnect.php';
-		
+        global $connection;
+        
 	// Select database.
-	if ($db_connect === FALSE) {
-		$errorMessage .= "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
-		$errorCount++;
-	}	
-	else {
-		if (!@mysql_select_db($db_name, $db_connect)) {
-			$errorMessage .= "<p>Connection error. Please try again later.</p>";
-			$errorCount++;
-		}	
-		else {
-			// verify the account belongs to the user
-			$sql = "SELECT * FROM account WHERE username='$userName' and accountid='$fromAccountId'";
-			$result = mysql_query($sql);
+	if ($connection->connect_error){
+            echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
+            $errorCount++;
+        } else {
+            // verify the account belongs to the user
+            $query = "SELECT * FROM account WHERE username='$userName' and accID='$fromAccountId'";
+            $result = queryMysql($query);
 
-			// If result matched $myusername and $accountId, table rows must be 1 row
-			$count = mysql_num_rows($result);
-			if($count == 1){
-				// record transfer to both accounts
-				$sql2 = "UPDATE account SET balance=balance-'$amount' WHERE username='$userName' and accountid='$fromAccountId'";
-				$result = mysql_query($sql2);
-				$sql3 = "UPDATE account SET balance=balance+'$amount' WHERE accountid='$toAccountId'";
-				$result = mysql_query($sql3);
-				$errorMessage .= "<p>Transfer completed.</p>";
-			}
-			else {
-				$errorCount++;
-				$errorMessage .= "Invalid user name/account number.<br />";
-			}
-		}
-		mysql_close($db_connect);
+            // If result matched $myusername and $accountId, table rows must be 1 row
+            $count = $result->num_rows;
+
+            if($count == 1){
+                // record transfer to both accounts
+                $sql2 = "UPDATE account SET balance=balance-'$amount' WHERE username='$userName' and accID='$fromAccountId'";
+                $result = queryMysql($sql2);
+                $sql3 = "UPDATE account SET balance=balance+'$amount' WHERE accID='$toAccountId'";
+                $result = queryMysql($sql3);
+                $errorMessage .= "<p>Transfer completed.</p>";
+            }
+            else {
+                $errorCount++;
+                $errorMessage .= "Invalid user name/account number.<br />";
+            }
 	}
 }
 

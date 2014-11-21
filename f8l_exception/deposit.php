@@ -19,9 +19,31 @@ include 'includes/inc_validateLogin.php';
 function deposit($userName,$accountId,$amount) {
 	global $errorCount;
 	global $errorMessage;
-	include 'includes/inc_dbConnect.php';
+        global $connection;
+	//include 'includes/inc_dbConnect.php';
 		
 	// Select database.
+        if ($connection->connect_error)
+            echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
+        else {
+            // verify the account belongs to the user
+            $query = "SELECT * FROM account WHERE username='$userName' and accID='$accountId'";
+            $result = queryMysql($query);
+            $count = $result->num_rows;
+            
+            // If result matched $myusername and $mypassword, table row must be 1 row
+            if($count == 1){
+                // record login to login_history table
+                $sql2 = "UPDATE account SET balance=balance+'$amount' WHERE username='$userName' and accID='$accountId'";
+                $result = queryMysql($sql2);
+                $errorMessage .= "<p>Deposit completed.</p>";
+            }
+            else {
+                $errorCount++;
+                $errorMessage .= "Invalid user name/account number.<br />";
+            }
+        }
+        /*
 	if ($db_connect === FALSE) {
 		$errorMessage .= "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
 		$errorCount++;
@@ -51,6 +73,8 @@ function deposit($userName,$accountId,$amount) {
 		}
 		mysql_close($db_connect);
 	}
+         *
+         */
 }
 
 function displayForm() {

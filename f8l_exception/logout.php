@@ -1,3 +1,6 @@
+<?php
+    include 'includes/inc_header.php';
+?>
 <!-- PVault | Logout -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 

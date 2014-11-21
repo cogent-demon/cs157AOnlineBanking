@@ -1,5 +1,4 @@
 <?php
-include 'functions.php';
 include 'includes/inc_header.php'; 
 include 'includes/inc_validateInput.php';
 include 'includes/inc_validateLogin.php';
