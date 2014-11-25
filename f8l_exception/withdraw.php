@@ -33,36 +33,18 @@ function Withdraw($userName,$accountId,$amount) {
             if ($count == 1){
                 $sql2 = "UPDATE account SET balance=balance-'$amount' WHERE username='$userName' and accID='$accountId'";
                 $result = queryMysql($sql2);
+                
+                $sql2 = "INSERT INTO transaction(username, transtype, toID, acctype, amount)
+                         SELECT username, 'Withdraw', accID, acctype, '$amount' FROM account WHERE 
+                         accID='$accountId'";
+                
+                $result = queryMysql($sql2);
+                
                 $errorMessage .= "<p>Withdraw completed.</p>";
             } else {
                 $errorCount++;
 		$errorMessage .= "Invalid user name/account number.<br />";
             }
-            /*
-		if (!@mysql_select_db($db_name, $db_connect)) {
-			$errorMessage .= "<p>Connection error. Please try again later.</p>";
-			$errorCount++;
-		}	
-		else {
-			// verify the account belongs to the user
-			$sql = "SELECT * FROM account WHERE username='$userName' and accountid='$accountId'";
-			$result = mysql_query($sql);
-
-			// If result matched $myusername and $mypassword, table row must be 1 row
-			$count = mysql_num_rows($result);
-			if($count == 1){
-				// record login to login_history table
-				$sql2 = "UPDATE account SET balance=balance-'$amount' WHERE username='$userName' and accountid='$accountId'";
-				$result = mysql_query($sql2);
-				$errorMessage .= "<p>Withdraw completed.</p>";
-			}
-			else {
-				$errorCount++;
-				$errorMessage .= "Invalid user name/account number.<br />";
-			}
-		}
-             * 
-             */
 	}
 }
 

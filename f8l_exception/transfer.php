@@ -39,6 +39,17 @@ function transfer($userName,$fromAccountId,$toAccountId,$amount) {
                 $result = queryMysql($sql2);
                 $sql3 = "UPDATE account SET balance=balance+'$amount' WHERE accID='$toAccountId'";
                 $result = queryMysql($sql3);
+                
+                $sql2 = "INSERT INTO transaction(username, transtype, toID, acctype, amount)
+                         SELECT username, 'Transfer', '$toAccountId', acctype, '$amount' FROM account WHERE 
+                         accID='$fromAccountId'";
+                $result = queryMysql($sql2);
+
+                $sql2 = "INSERT INTO transaction(username, transtype, toID, acctype, amount)
+                         SELECT username, 'Transfer', accid, acctype, '$amount' FROM account WHERE 
+                         accID='$toAccountId'";
+                $result = queryMysql($sql2);
+                
                 $errorMessage .= "<p>Transfer completed.</p>";
             }
             else {

@@ -15,7 +15,10 @@ function createTable($name, $query){
 function queryMysql($query){
     global $connection;
     $result = $connection->query($query);
-    if (!$result) die ($connection->error);
+    if (!$result) {
+        echo $query;
+        die ($connection->error);
+    }
     return $result;
 }
 
