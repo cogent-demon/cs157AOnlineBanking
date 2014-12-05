@@ -17,6 +17,7 @@
 <?php
 include 'includes/inc_validateInput.php';
 include 'includes/inc_validateLogin.php';
+include 'includes/inc_userFunctions.php';
 
 function displayForm() {
 ?>
@@ -62,6 +63,7 @@ else {
 	else {					// login approved
 		$_SESSION['login'] = $userName;
 		//header("location:my_documents.php");
+                login($userName);
 		?><script language="JavaScript">window.location = "my_accounts.php";</script><?php
 		exit();
 	}

@@ -1,0 +1,91 @@
+Mostly the same as schema.php except as noted.
+
+CREATE TABLE users (username VARCHAR(30) NOT NULL PRIMARY KEY,
+	password VARCHAR(30) NOT NULL,
+	email VARCHAR(30) NOT NULL,
+	loginDate DATE,
+	openDate DATE);
+	
+CREATE TABLE account (accID INT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(30),
+	acctype VARCHAR(30),
+	balance FLOAT,
+	interest FLOAT,
+	dateOpened TIMESTAMP,
+	FOREIGN KEY(username) REFERENCES Users(username)
+	ON DELETE CASCADE);
+
+// can't use accId as primary key because there will be multiple transactions per accID.
+// added transID field as primary key to satisfy Kim's requirement that every table have a Primary Key.	
+CREATE TABLE transaction (transID INT AUTO_INCREMENT PRIMARY KEY,
+	accID INT,
+	username VARCHAR(30),
+	acctype VARCHAR(30),
+	transtype VARCHAR(30),
+	amount FLOAT (15,2),
+	toID INT,
+	transdate TIMESTAMP,
+	updatedat DATE
+	FOREIGN KEY(username) REFERENCES users(username)
+	ON DELETE CASCADE);
+	
+CREATE TABLE creditcard (accID INT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(30) NOT NULL,
+	balance FLOAT(15,2),
+	minPayment FLOAT(15,2),
+	interestRate FLOAT(15,2),
+	maxLimit FLOAT(15,2),
+	paymentDueDate DATE,
+	paymentDate TIMESTAMP,
+	FOREIGN KEY(username) REFERENCES users(username)
+	ON DELETE CASCADE);
+
+CREATE TABLE loan (accID INT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(30) NOT NULL,
+	amount FLOAT (15,2),
+	balance FLOAT (15,20),
+	interestRate FLOAT (15,2),
+	paymentDueDate DATE,
+	paymentDate TIMESTAMP,
+	FOREIGN KEY (username) REFERENCES users(username)
+	ON DELETE CASCADE);
+	
+CREATE TABLE transactionarchive (transID INT AUTO_INCREMENT PRIMARY KEY,
+	accID INT,
+	username VARCHAR(30),
+	acctype VARCHAR(30),
+	transtype VARCHAR(30),
+	amount FLOAT (15,2),
+	toID INT,
+	transdate TIMESTAMP,
+	FOREIGN KEY(username) REFERENCES users(username)
+	ON DELETE CASCADE);
+	
+CREATE TABLE log (
+username varchar(30),
+logindate TIMESTAMP,
+FOREIGN KEY(username) REFERENCES users (username)
+ON DELETE cascade);
+
+// Users: Andy, Brad, Clint, Danny, Elvis, Fred, George, Henry, Isabel, John, Keira, Larry, Mick, Nancy, Paul, Ringo, Stan, Tom, Violet, Warren
+
+LOAD DATA LOCAL INFILE 'D:/mywebsite/cs157a/cs157AOnlineBanking/f8l_exception/other/users.txt' INTO TABLE Users
+LINES TERMINATED BY '\r\n';
+
+LOAD DATA LOCAL INFILE 'D:/mywebsite/cs157a/cs157AOnlineBanking/f8l_exception/other/account.txt' INTO TABLE Account
+LINES TERMINATED BY '\r\n';
+
+LOAD DATA LOCAL INFILE 'D:/mywebsite/cs157a/cs157AOnlineBanking/f8l_exception/other/archive.txt' INTO TABLE Account
+LINES TERMINATED BY '\r\n';
+
+LOAD DATA LOCAL INFILE 'D:/mywebsite/cs157a/cs157AOnlineBanking/f8l_exception/other/creditcard.txt' INTO TABLE CreditCard
+LINES TERMINATED BY '\r\n';
+
+LOAD DATA LOCAL INFILE 'D:/mywebsite/cs157a/cs157AOnlineBanking/f8l_exception/other/loan.txt' INTO TABLE Loan
+LINES TERMINATED BY '\r\n';
+
+LOAD DATA LOCAL INFILE 'D:/mywebsite/cs157a/cs157AOnlineBanking/f8l_exception/other/log.txt' INTO TABLE CreditCard
+LINES TERMINATED BY '\r\n';
+
+LOAD DATA LOCAL INFILE 'D:/mywebsite/cs157a/cs157AOnlineBanking/f8l_exception/other/transaction.txt' INTO TABLE Transaction
+LINES TERMINATED BY '\r\n';

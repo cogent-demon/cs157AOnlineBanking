@@ -23,29 +23,33 @@ function openNewLoan($userName,$balance) {
 	
 	// Select database.
 	if ($connection->connect_error){
-            echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
+            echo "<div class='error'><p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p></div>";
             $errorCount++;
         } else {
-            
-            if (!@mysql_select_db($db_name, $db_connect))
-                    echo "<p>Connection error. Please try again later.</p>";
-            else {
-                    $today = date("Ymd");
-                    $dueDate = date('Y-m-d', strtotime("+30 days")); // set due date to 30 days after today
-                    $SQLstring = "INSERT INTO 
-                            loan (username, amount, balance, dateOpened, paymentDueDate) 
-                            VALUES ('$userName', '$balance', '$balance', '$today', '$dueDate')";
-                    $QueryResult = @mysql_query($SQLstring, $db_connect);
+            $sql = "INSERT INTO loan (username, amount, balance, interestrate, dateopened, paymentDueDate) 
+                    VALUES ('$userName', '$balance', '$balance', .1050, Now(), Now() + INTERVAL 30 DAY)";
+            $result = queryMysql($sql);
 
-                    // get loan id
-                    $SQLstring2 = "SELECT max(loanid) as loanId FROM loan;";
-                    $QueryResult2 = @mysql_query($SQLstring2, $db_connect);
-                    $row = mysql_fetch_assoc($QueryResult2);
-                    $loanId = $row['loanId'];
-            }
-            mysql_close($db_connect);
+            //get loan id and insert into transaction table
+            $sql = "SELECT max(loanid) FROM loan WHERE username='$userName'";
+            $result = queryMysql($sql);
+            $row = $result->fetch_array(MYSQLI_ASSOC);
+            $loanid = $row['max(loanid)'];
+            $sql2 = "INSERT INTO transaction(username,transtype, toID, acctype, amount)
+                 SELECT username, 'New Loan', '$loanid', 'Loan', '$balance' FROM loan WHERE 
+                 username='$userName'";
+
+            $result = queryMysql($sql2);
+            /*
+            // get loan id
+            $SQLstring2 = "SELECT max(loanid) as loanId FROM loan;";
+            $QueryResult2 = @mysql_query($SQLstring2, $db_connect);
+            $row = mysql_fetch_assoc($QueryResult2);
+            $loanId = $row['loanId'];
+             * 
+             */
 	}
-	return $loanId;
+	return $loanid;
 }
 
 function displayForm() {

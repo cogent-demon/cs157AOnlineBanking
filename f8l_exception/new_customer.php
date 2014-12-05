@@ -19,6 +19,7 @@
 include 'includes/inc_validatePassword.php';
 include 'includes/inc_validateUserName.php';
 include 'includes/inc_validateEmail.php';
+include 'functions.php';
 
 function createNewCustomer($userName,$pw,$email) {
 	global $errorCount;

@@ -4,58 +4,49 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>F8L Exception Online Bank | Withdraw</title>
+	<title>F8L Exception Online Bank | Credit</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<?php include 'includes/inc_header.php'; ?>
 	
 </head>
 <body>
         <hr />
-        <h1>Withdraw</h1>
+        <h1>Credit</h1>
 <?php
 include 'includes/inc_validateInput.php';
 include 'includes/inc_validateLogin.php';
 
-function Withdraw($userName,$accountId,$amount) {
+function credit($userName,$accountId,$amount) {
 	global $errorCount;
 	global $errorMessage;
         global $connection;
+        
 	// Select database.
         if ($connection->connect_error){
-            echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
+            echo "<div class='error'><p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p></div>";
             $errorCount++;
         } else {
-            // verify the account belongs to the user
-            $query = "SELECT * FROM account WHERE username='$userName' and accID='$accountId'";
-            $result = queryMysql($query);
-            $count = $result->num_rows;
-            
-            if ($count == 1){
-                $sql2 = "UPDATE account SET balance=balance-'$amount' WHERE username='$userName' and accID='$accountId'";
-                $result = queryMysql($sql2);
-                
-                $sql2 = "INSERT INTO transaction(username, accid, transtype, toID, acctype, amount)
-                         SELECT username, accid, 'Withdraw', NULL, acctype, '$amount' FROM account WHERE 
-                         accID='$accountId'";
-                $result = queryMysql($sql2);
-                
-                $errorMessage .= "<p>Withdraw completed.</p>";
-            } else {
-                $errorCount++;
-		$errorMessage .= "Invalid user name/account number.<br />";
-            }
+            $sql2 = "UPDATE creditcard SET balance=balance+'$amount' WHERE username='$userName' and creditid='$accountId'";
+            $result = queryMysql($sql2);
+
+            $sql2 = "INSERT INTO transaction(username, accid, transtype, toID, acctype, amount)
+                     SELECT username, NULL, 'Credit', creditid, acctype, '$amount' FROM creditcard WHERE 
+                     creditid='$accountId'";
+            $result = queryMysql($sql2);
+
+            $errorMessage .= "<p>Credit completed.</p>";
 	}
 }
 
 function displayForm() {
 ?>
-	<h3>Enter account number and withdraw amount.</h3>
+	<h3>Enter account number and credit amount.</h3>
 	<?php 
 	global $errorMessage;
 	echo $errorMessage ?>
-	<form method="POST" action="withdraw.php">
+	<form method="POST" action="credit.php">
 		<p>Account Number: <input type="text" name="accountNumber" /></p>
-		<p>Withdraw Amount: <input type="amount" name="amount" /></p>
+		<p>Credit Amount: <input type="amount" name="amount" /></p>
 		<p><input type="submit" name="Submit" value="Submit" /></p>
 	</form>
 	<br /><br />
@@ -75,7 +66,7 @@ echo "User Name: ".$userName."<br />";
 // if submit button is clicked, get accountNumber and amount
 if (isset($_POST['Submit'])) {
 	$accountNumber  = validateInput($_POST['accountNumber'],"Account Number");
-	$amount  = validateInput($_POST['amount'],"Withdraw Amount");
+	$amount  = validateInput($_POST['amount'],"Credit Amount");
 	
 	if ($errorCount == 0)
 		$showForm = FALSE;
@@ -93,7 +84,7 @@ else {
 		displayForm();		// new page load
 	}
 	else {					// make withdraw
-		withdraw($userName,$accountNumber,$amount);
+		credit($userName,$accountNumber,$amount);
 		echo $errorMessage."<br />";
 	}
 }

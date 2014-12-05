@@ -1,0 +1,290 @@
+NULL	Paul	Savings	Deposit	50	2	12/2/2014
+NULL	Brad	Checking	Deposit	25	5	12/2/2014
+11	Mick	Savings	Withdraw	10.5	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	17.5	12	12/2/2014
+NULL	Clint	Checking	Transfer	33.57	16	12/2/2014
+NULL	Larry	Checking	Deposit	81	17	12/2/2014
+NULL	Henry	Checking	Deposit	76	20	12/2/2014
+NULL	Andy	Checking	Deposit	20	8	12/2/2014
+NULL	Clint	Checking	Deposit	1200	15	12/2/2014
+NULL	Henry	Checking	Deposit	190	20	12/2/2014
+12	Ringo	Checking	Withdraw	18.5	NULL	12/2/2014
+NULL	Larry	Checking	Deposit	150.45	17	12/2/2014
+NULL	Stan	Checking	Deposit	42	30	12/2/2014
+NULL	Tom	Checking	Deposit	10	13	12/2/2014
+NULL	Clint	Checking	Deposit	100	15	12/2/2014
+NULL	Elvis	Checking	Deposit	67.6	24	12/2/2014
+NULL	Mick	Savings	Deposit	18	11	12/2/2014
+NULL	Ringo	Checking	Deposit	85.19	12	12/2/2014
+NULL	Violet	Checking	Deposit	23.88	9	12/2/2014
+NULL	Stan	Checking	Deposit	405.6	30	12/2/2014
+NULL	Henry	Checking	Deposit	800	20	12/2/2014
+NULL	Clint	Checking	Deposit	596	15	12/2/2014
+NULL	Warren	Checking	Deposit	5000	27	12/2/2014
+NULL	Stan	Checking	Deposit	60.1	30	12/2/2014
+9	Violet	Checking	Withdraw	25.5	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	93.5	4	12/2/2014
+30	Stan	Checking	Transfer	150	21	12/2/2014
+NULL	Larry	Checking	Deposit	120	17	12/2/2014
+NULL	Elvis	Checking	Deposit	81	24	12/2/2014
+NULL	Andy	Checking	Deposit	25	8	12/2/2014
+NULL	Tom	Checking	Deposit	17.5	13	12/2/2014
+NULL	Nancy	Checking	Deposit	64.2	4	12/2/2014
+NULL	Ringo	Checking	Deposit	75.9	12	12/2/2014
+NULL	Stan	Checking	Deposit	5	30	12/2/2014
+NULL	Clint	Checking	Deposit	312	15	12/2/2014
+20	Henry	Checking	Withdraw	185.47	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	59.1	12	12/2/2014
+24	Elvis	Checking	Withdraw	155	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	17.5	4	12/2/2014
+NULL	Warren	Checking	Deposit	28.07	27	12/2/2014
+NULL	jlee	Checking	Deposit	215.21	31	12/2/2014
+NULL	jlee	Savings	Deposit	54362.48	32	12/2/2014
+31	jlee	Checking	Withdraw	250	NULL	12/2/2014
+32	jlee	Savings	Withdraw	10000	NULL	12/2/2014
+NULL	jlee	Credit Card	New Credit Card	5000	102	12/2/2014
+NULL	jlee	Checking	Deposit	200	31	12/2/2014
+32	jlee	Savings	Withdraw	0.73	NULL	12/2/2014
+32	jlee	Savings	Withdraw	2	NULL	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	103	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	115	12/2/2014
+NULL	vgarcia	Checking	Deposit	50	103	12/2/2014
+NULL	vgarcia	Credit Card	New Credit Card	5000	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit	100	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit Card Payment	50	12	12/2/2014
+NULL	vgarcia	Loan	New Loan	5000	13	12/2/2014
+NULL	vgarcia	Loan	Loan Payment	4500	13	12/2/2014
+32	jlee	Savings	Transfer	50000	2	12/2/2014
+32	Paul	Savings	Transfer	50000	2	12/2/2014
+NULL	Paul	Savings	Deposit	50	2	12/2/2014
+NULL	Brad	Checking	Deposit	25	5	12/2/2014
+11	Mick	Savings	Withdraw	10.5	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	17.5	12	12/2/2014
+NULL	Clint	Checking	Transfer	33.57	16	12/2/2014
+NULL	Larry	Checking	Deposit	81	17	12/2/2014
+NULL	Henry	Checking	Deposit	76	20	12/2/2014
+NULL	Andy	Checking	Deposit	20	8	12/2/2014
+NULL	Clint	Checking	Deposit	1200	15	12/2/2014
+NULL	Henry	Checking	Deposit	190	20	12/2/2014
+12	Ringo	Checking	Withdraw	18.5	NULL	12/2/2014
+NULL	Larry	Checking	Deposit	150.45	17	12/2/2014
+NULL	Stan	Checking	Deposit	42	30	12/2/2014
+NULL	Tom	Checking	Deposit	10	13	12/2/2014
+NULL	Clint	Checking	Deposit	100	15	12/2/2014
+NULL	Elvis	Checking	Deposit	67.6	24	12/2/2014
+NULL	Mick	Savings	Deposit	18	11	12/2/2014
+NULL	Ringo	Checking	Deposit	85.19	12	12/2/2014
+NULL	Violet	Checking	Deposit	23.88	9	12/2/2014
+NULL	Stan	Checking	Deposit	405.6	30	12/2/2014
+NULL	Henry	Checking	Deposit	800	20	12/2/2014
+NULL	Clint	Checking	Deposit	596	15	12/2/2014
+NULL	Warren	Checking	Deposit	5000	27	12/2/2014
+NULL	Stan	Checking	Deposit	60.1	30	12/2/2014
+9	Violet	Checking	Withdraw	25.5	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	93.5	4	12/2/2014
+30	Stan	Checking	Transfer	150	21	12/2/2014
+NULL	Larry	Checking	Deposit	120	17	12/2/2014
+NULL	Elvis	Checking	Deposit	81	24	12/2/2014
+NULL	Andy	Checking	Deposit	25	8	12/2/2014
+NULL	Tom	Checking	Deposit	17.5	13	12/2/2014
+NULL	Nancy	Checking	Deposit	64.2	4	12/2/2014
+NULL	Ringo	Checking	Deposit	75.9	12	12/2/2014
+NULL	Stan	Checking	Deposit	5	30	12/2/2014
+NULL	Clint	Checking	Deposit	312	15	12/2/2014
+20	Henry	Checking	Withdraw	185.47	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	59.1	12	12/2/2014
+24	Elvis	Checking	Withdraw	155	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	17.5	4	12/2/2014
+NULL	Warren	Checking	Deposit	28.07	27	12/2/2014
+NULL	jlee	Checking	Deposit	215.21	31	12/2/2014
+NULL	jlee	Savings	Deposit	54362.48	32	12/2/2014
+31	jlee	Checking	Withdraw	250	NULL	12/2/2014
+32	jlee	Savings	Withdraw	10000	NULL	12/2/2014
+NULL	jlee	Credit Card	New Credit Card	5000	102	12/2/2014
+NULL	jlee	Checking	Deposit	200	31	12/2/2014
+32	jlee	Savings	Withdraw	0.73	NULL	12/2/2014
+32	jlee	Savings	Withdraw	2	NULL	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	103	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	115	12/2/2014
+NULL	vgarcia	Checking	Deposit	50	103	12/2/2014
+NULL	vgarcia	Credit Card	New Credit Card	5000	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit	100	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit Card Payment	50	12	12/2/2014
+NULL	vgarcia	Loan	New Loan	5000	13	12/2/2014
+NULL	vgarcia	Loan	Loan Payment	4500	13	12/2/2014
+32	jlee	Savings	Transfer	50000	2	12/2/2014
+32	Paul	Savings	Transfer	50000	2	12/2/2014
+NULL	Paul	Savings	Deposit	50	2	12/2/2014
+NULL	Brad	Checking	Deposit	25	5	12/2/2014
+11	Mick	Savings	Withdraw	10.5	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	17.5	12	12/2/2014
+NULL	Clint	Checking	Transfer	33.57	16	12/2/2014
+NULL	Larry	Checking	Deposit	81	17	12/2/2014
+NULL	Henry	Checking	Deposit	76	20	12/2/2014
+NULL	Andy	Checking	Deposit	20	8	12/2/2014
+NULL	Clint	Checking	Deposit	1200	15	12/2/2014
+NULL	Henry	Checking	Deposit	190	20	12/2/2014
+12	Ringo	Checking	Withdraw	18.5	NULL	12/2/2014
+NULL	Larry	Checking	Deposit	150.45	17	12/2/2014
+NULL	Stan	Checking	Deposit	42	30	12/2/2014
+NULL	Tom	Checking	Deposit	10	13	12/2/2014
+NULL	Clint	Checking	Deposit	100	15	12/2/2014
+NULL	Elvis	Checking	Deposit	67.6	24	12/2/2014
+NULL	Mick	Savings	Deposit	18	11	12/2/2014
+NULL	Ringo	Checking	Deposit	85.19	12	12/2/2014
+NULL	Violet	Checking	Deposit	23.88	9	12/2/2014
+NULL	Stan	Checking	Deposit	405.6	30	12/2/2014
+NULL	Henry	Checking	Deposit	800	20	12/2/2014
+NULL	Clint	Checking	Deposit	596	15	12/2/2014
+NULL	Warren	Checking	Deposit	5000	27	12/2/2014
+NULL	Stan	Checking	Deposit	60.1	30	12/2/2014
+9	Violet	Checking	Withdraw	25.5	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	93.5	4	12/2/2014
+30	Stan	Checking	Transfer	150	21	12/2/2014
+NULL	Larry	Checking	Deposit	120	17	12/2/2014
+NULL	Elvis	Checking	Deposit	81	24	12/2/2014
+NULL	Andy	Checking	Deposit	25	8	12/2/2014
+NULL	Tom	Checking	Deposit	17.5	13	12/2/2014
+NULL	Nancy	Checking	Deposit	64.2	4	12/2/2014
+NULL	Ringo	Checking	Deposit	75.9	12	12/2/2014
+NULL	Stan	Checking	Deposit	5	30	12/2/2014
+NULL	Clint	Checking	Deposit	312	15	12/2/2014
+20	Henry	Checking	Withdraw	185.47	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	59.1	12	12/2/2014
+24	Elvis	Checking	Withdraw	155	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	17.5	4	12/2/2014
+NULL	Warren	Checking	Deposit	28.07	27	12/2/2014
+NULL	jlee	Checking	Deposit	215.21	31	12/2/2014
+NULL	jlee	Savings	Deposit	54362.48	32	12/2/2014
+31	jlee	Checking	Withdraw	250	NULL	12/2/2014
+32	jlee	Savings	Withdraw	10000	NULL	12/2/2014
+NULL	jlee	Credit Card	New Credit Card	5000	102	12/2/2014
+NULL	jlee	Checking	Deposit	200	31	12/2/2014
+32	jlee	Savings	Withdraw	0.73	NULL	12/2/2014
+32	jlee	Savings	Withdraw	2	NULL	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	103	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	115	12/2/2014
+NULL	vgarcia	Checking	Deposit	50	103	12/2/2014
+NULL	vgarcia	Credit Card	New Credit Card	5000	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit	100	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit Card Payment	50	12	12/2/2014
+NULL	vgarcia	Loan	New Loan	5000	13	12/2/2014
+NULL	vgarcia	Loan	Loan Payment	4500	13	12/2/2014
+32	jlee	Savings	Transfer	50000	2	12/2/2014
+32	Paul	Savings	Transfer	50000	2	12/2/2014
+NULL	Paul	Savings	Deposit	50	2	12/2/2014
+NULL	Brad	Checking	Deposit	25	5	12/2/2014
+11	Mick	Savings	Withdraw	10.5	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	17.5	12	12/2/2014
+NULL	Clint	Checking	Transfer	33.57	16	12/2/2014
+NULL	Larry	Checking	Deposit	81	17	12/2/2014
+NULL	Henry	Checking	Deposit	76	20	12/2/2014
+NULL	Andy	Checking	Deposit	20	8	12/2/2014
+NULL	Clint	Checking	Deposit	1200	15	12/2/2014
+NULL	Henry	Checking	Deposit	190	20	12/2/2014
+12	Ringo	Checking	Withdraw	18.5	NULL	12/2/2014
+NULL	Larry	Checking	Deposit	150.45	17	12/2/2014
+NULL	Stan	Checking	Deposit	42	30	12/2/2014
+NULL	Tom	Checking	Deposit	10	13	12/2/2014
+NULL	Clint	Checking	Deposit	100	15	12/2/2014
+NULL	Elvis	Checking	Deposit	67.6	24	12/2/2014
+NULL	Mick	Savings	Deposit	18	11	12/2/2014
+NULL	Ringo	Checking	Deposit	85.19	12	12/2/2014
+NULL	Violet	Checking	Deposit	23.88	9	12/2/2014
+NULL	Stan	Checking	Deposit	405.6	30	12/2/2014
+NULL	Henry	Checking	Deposit	800	20	12/2/2014
+NULL	Clint	Checking	Deposit	596	15	12/2/2014
+NULL	Warren	Checking	Deposit	5000	27	12/2/2014
+NULL	Stan	Checking	Deposit	60.1	30	12/2/2014
+9	Violet	Checking	Withdraw	25.5	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	93.5	4	12/2/2014
+30	Stan	Checking	Transfer	150	21	12/2/2014
+NULL	Larry	Checking	Deposit	120	17	12/2/2014
+NULL	Elvis	Checking	Deposit	81	24	12/2/2014
+NULL	Andy	Checking	Deposit	25	8	12/2/2014
+NULL	Tom	Checking	Deposit	17.5	13	12/2/2014
+NULL	Nancy	Checking	Deposit	64.2	4	12/2/2014
+NULL	Ringo	Checking	Deposit	75.9	12	12/2/2014
+NULL	Stan	Checking	Deposit	5	30	12/2/2014
+NULL	Clint	Checking	Deposit	312	15	12/2/2014
+20	Henry	Checking	Withdraw	185.47	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	59.1	12	12/2/2014
+24	Elvis	Checking	Withdraw	155	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	17.5	4	12/2/2014
+NULL	Warren	Checking	Deposit	28.07	27	12/2/2014
+NULL	jlee	Checking	Deposit	215.21	31	12/2/2014
+NULL	jlee	Savings	Deposit	54362.48	32	12/2/2014
+31	jlee	Checking	Withdraw	250	NULL	12/2/2014
+32	jlee	Savings	Withdraw	10000	NULL	12/2/2014
+NULL	jlee	Credit Card	New Credit Card	5000	102	12/2/2014
+NULL	jlee	Checking	Deposit	200	31	12/2/2014
+32	jlee	Savings	Withdraw	0.73	NULL	12/2/2014
+32	jlee	Savings	Withdraw	2	NULL	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	103	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	115	12/2/2014
+NULL	vgarcia	Checking	Deposit	50	103	12/2/2014
+NULL	vgarcia	Credit Card	New Credit Card	5000	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit	100	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit Card Payment	50	12	12/2/2014
+NULL	vgarcia	Loan	New Loan	5000	13	12/2/2014
+NULL	vgarcia	Loan	Loan Payment	4500	13	12/2/2014
+32	jlee	Savings	Transfer	50000	2	12/2/2014
+32	Paul	Savings	Transfer	50000	2	12/2/2014
+NULL	Paul	Savings	Deposit	50	2	12/2/2014
+NULL	Brad	Checking	Deposit	25	5	12/2/2014
+11	Mick	Savings	Withdraw	10.5	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	17.5	12	12/2/2014
+NULL	Clint	Checking	Transfer	33.57	16	12/2/2014
+NULL	Larry	Checking	Deposit	81	17	12/2/2014
+NULL	Henry	Checking	Deposit	76	20	12/2/2014
+NULL	Andy	Checking	Deposit	20	8	12/2/2014
+NULL	Clint	Checking	Deposit	1200	15	12/2/2014
+NULL	Henry	Checking	Deposit	190	20	12/2/2014
+12	Ringo	Checking	Withdraw	18.5	NULL	12/2/2014
+NULL	Larry	Checking	Deposit	150.45	17	12/2/2014
+NULL	Stan	Checking	Deposit	42	30	12/2/2014
+NULL	Tom	Checking	Deposit	10	13	12/2/2014
+NULL	Clint	Checking	Deposit	100	15	12/2/2014
+NULL	Elvis	Checking	Deposit	67.6	24	12/2/2014
+NULL	Mick	Savings	Deposit	18	11	12/2/2014
+NULL	Ringo	Checking	Deposit	85.19	12	12/2/2014
+NULL	Violet	Checking	Deposit	23.88	9	12/2/2014
+NULL	Stan	Checking	Deposit	405.6	30	12/2/2014
+NULL	Henry	Checking	Deposit	800	20	12/2/2014
+NULL	Clint	Checking	Deposit	596	15	12/2/2014
+NULL	Warren	Checking	Deposit	5000	27	12/2/2014
+NULL	Stan	Checking	Deposit	60.1	30	12/2/2014
+9	Violet	Checking	Withdraw	25.5	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	93.5	4	12/2/2014
+30	Stan	Checking	Transfer	150	21	12/2/2014
+NULL	Larry	Checking	Deposit	120	17	12/2/2014
+NULL	Elvis	Checking	Deposit	81	24	12/2/2014
+NULL	Andy	Checking	Deposit	25	8	12/2/2014
+NULL	Tom	Checking	Deposit	17.5	13	12/2/2014
+NULL	Nancy	Checking	Deposit	64.2	4	12/2/2014
+NULL	Ringo	Checking	Deposit	75.9	12	12/2/2014
+NULL	Stan	Checking	Deposit	5	30	12/2/2014
+NULL	Clint	Checking	Deposit	312	15	12/2/2014
+20	Henry	Checking	Withdraw	185.47	NULL	12/2/2014
+NULL	Ringo	Checking	Deposit	59.1	12	12/2/2014
+24	Elvis	Checking	Withdraw	155	NULL	12/2/2014
+NULL	Nancy	Checking	Deposit	17.5	4	12/2/2014
+NULL	Warren	Checking	Deposit	28.07	27	12/2/2014
+NULL	jlee	Checking	Deposit	215.21	31	12/2/2014
+NULL	jlee	Savings	Deposit	54362.48	32	12/2/2014
+31	jlee	Checking	Withdraw	250	NULL	12/2/2014
+32	jlee	Savings	Withdraw	10000	NULL	12/2/2014
+NULL	jlee	Credit Card	New Credit Card	5000	102	12/2/2014
+NULL	jlee	Checking	Deposit	200	31	12/2/2014
+32	jlee	Savings	Withdraw	0.73	NULL	12/2/2014
+32	jlee	Savings	Withdraw	2	NULL	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	103	12/2/2014
+NULL	vgarcia	Savings	New Account	50000	115	12/2/2014
+NULL	vgarcia	Checking	Deposit	50	103	12/2/2014
+NULL	vgarcia	Credit Card	New Credit Card	5000	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit	100	12	12/2/2014
+NULL	vgarcia	Credit Card	Credit Card Payment	50	12	12/2/2014
+NULL	vgarcia	Loan	New Loan	5000	13	12/2/2014
+NULL	vgarcia	Loan	Loan Payment	4500	13	12/2/2014
+32	jlee	Savings	Transfer	50000	2	12/2/2014
+32	Paul	Savings	Transfer	50000	2	12/2/2014

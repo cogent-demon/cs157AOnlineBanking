@@ -1,60 +1,240 @@
 F8L Exception -- 15 Functions:
 
 1.	Add New User
+	** LOCATION: new_account
 	Add New Account (checking/savings)
-	Add New Loan
-	Add New CreditCard
+	INSERT INTO account (username,balance,acctype) 
+				VALUES ('$userName','$balance','$accountType')
 	
+	** LOCATION: new_loan
+	Add New Loan
+	INSERT INTO loan (username, amount, balance, interestrate, dateopened, paymentDueDate) 
+                    VALUES ('$userName', '$balance', '$balance', .1050, Now(), Now() + INTERVAL 30 DAY)
+	
+	** LOCATION: new_creditcard
+	Add New CreditCard
+	INSERT INTO creditcard (username, maxLimit, dateopened, paymentDueDate) 
+                    VALUES ('$userName', '$limit', Now(), Now() + INTERVAL 30 DAY)
+
 2.	Change Password
 	Reset Password
-
+	** LOCATION: change_password
+	
 3.	View Account Statement (checking/savings)
-
-4. 	Overdraft Fee (Trigger)
+	*** LOCATION: inc_userFunctions
+	*** FUNCTION NAME: function getChecking($Login)
+	*** FUNCTION NAME: function getSavings($Login)
+	*** FUNCTION NAME: function getCredit($Login)
+	*** FUNCTION NAME: function getLoan($Login)
+	
+	View Checking and Savings
+	SELECT * from account WHERE username='$userName'
+	
+	View Loan
+	SELECT * from loan WHERE username='$userName'
+	
+	View Credit Card
+	SELECT * from creditcard WHERE username='$userName'
+	
+	
+4. 	Checking/Savings Overdraft Fee (Trigger)
 	charge $25 fee if balance dips below zero
+		DELIMITER //
+		CREATE TRIGGER overdraftfee
+			BEFORE UPDATE ON account
+			FOR EACH ROW
+			BEGIN
+				IF NEW.balance < 0 THEN
+					SET NEW.balance= NEW.balance - 25;
+					INSERT INTO transaction(username, accid, transtype, toID, acctype, amount)
+						VALUES(NEW.username, NEW.accid, 'Overdraft Fee', NEW.accid, NEW.acctype, 25);
+				END IF;
+			END //
+		DELIMITER ;
 	
-5.	ATM Fee (Trigger)
-	charge $3 fee every time function ATMwithdraw is used
 	
-6.	Late Payment (Trigger)
-	charge $10 fee for every late payment
+5.	View Existing User Accounts and # of Existing Accounts
+	*** LOCATION: inc_adminFunctions
+	*** FUNCTION NAME: function getUserAccounts()
 	
-7.	Low Balance (Admin - Stored Procedure) - DONE
-	generate a list of users with accounts that have balances <$200
+	SELECT acctype, count(*) FROM(
+            SELECT username,acctype FROM account
+            UNION
+            SELECT username, acctype FROM creditcard
+            UNION
+            SELECT username,acctype FROM loan) acl
+            GROUP BY acctype;
+			
+	
+6.	Late Credit Card Payment (Trigger)
+	charge $10 fee for every late CC payment
+		DELIMITER //
+		CREATE TRIGGER lateccfee
+		BEFORE UPDATE ON CreditCard
+		FOR EACH ROW BEGIN
+			IF New.balance<Old.balance AND Old.paymentDueDate<CURDATE() THEN
+			SET New.balance=New.balance+10;
+			INSERT INTO transaction(username, accid, transtype, toID, acctype, amount)
+				VALUES(NEW.username, NEW.creditid, 'CC Late Payment Fee', NEW.creditid, NEW.acctype, 10);
+			END IF;
+		END //
+		DELIMITER ;
+		
+		*** To test, first find past due credit card accounts:
+		SELECT username,accID,balance FROM creditcard WHERE paymentDueDate<CURDATE();
+	
+	
+7.	Low Balance (Admin - Stored Procedure)
+	generate a list of users (username and email) with accounts that have balances <$200
+	*** LOCATION: inc_adminFunctions
+	*** FUNCTION NAME: getLowBalance($num)
+	
+	DROP PROCEDURE IF EXISTS getLowBalance;
+	DELIMITER //
+	CREATE PROCEDURE getLowBalance(IN num DOUBLE)
+	BEGIN
+		SELECT username, acctype, balance
+		FROM account
+		where balance <= num;
+	END //
+	DELIMITER ;
+	
 	
 8.	Daily Login (Admin - Stored Procedure)
 	generate a list of users who logged in today
+	*** LOCATION: inc_userFunctions
+	*** FUNCTION NAME: function login($username)
+	
+	DELIMITER //
+	CREATE PROCEDURE logUser(IN user VARCHAR(30))
+	BEGIN
+		INSERT INTO log(username) VALUES(user);
+	END //
+	DELIMITER ;
+	
 	
 9.	Loyalty Program (Admin - Stored Procedure)
 	generate a list of users with more than $10,000 combined balance 
-	and have been customer for over 1 year
+	and have been customer for over 5 years
+	*** LOCATION: inc_adminFunctions
+	*** FUNCTION NAME: getLoyalCustomers()
 	
-10.	Annual Credit Card Fee (Trigger)
-	charge a $20 per year fee to all credit card accounts
+		DROP PROCEDURE IF EXISTS loyaltyProgram;
+		DELIMITER //
+		CREATE PROCEDURE loyaltyProgram (OUT offer VARCHAR(30))
+		BEGIN
+			SELECT username FROM users 
+			WHERE openDate<'2009-11-30' 
+			AND username IN
+			(SELECT username FROM account 
+			GROUP BY username 
+			HAVING sum(balance)>10000);
+		END //
+		DELIMITER ;
+		
+		CALL loyaltyProgram(@mylist);
+		SELECT @mylist;
 	
-11.	No cc w/ $> (Admin)
+10. List User Accounts
+		*** LOCATION: inc_adminFunctions
+		*** FUNCTION NAME: getNumAccounts()
+		
+		SELECT a.username, a.acctype, numofcredit, numofloan
+		FROM account a
+		LEFT JOIN
+		(SELECT username, count(*) as numofcredit
+		FROM creditcard
+		GROUP BY username) c on a.username=c.username
+		LEFT JOIN
+		(SELECT username, count(*) as numofloan
+		FROM loan
+		GROUP BY username) l on c.username=l.username
+		ORDER BY a.username ASC;
+
+11.	Offer Credit Card > (Admin)
 	examines all accounts.
 	if account is greater than $5,000, offer a credit card.
+	*** LOCATION: inc_adminFunctions
+	*** FUNCTION NAME: getOfferCC($num)
+	
+		DROP PROCEDURE IF EXISTS offerCreditCard;
+		DELIMITER //
+		CREATE PROCEDURE offerCreditCard(IN amount DOUBLE)
+		BEGIN
+			SELECT DISTINCT username, total FROM account 
+			WHERE username  IN
+			(SELECT username, sum(balance) as total FROM account GROUP BY username HAVING total >amount)
+			AND username NOT IN 
+			(SELECT username FROM creditcard);
+		END //
+		DELIMITER ;
 
 12.	Archive Transaction table (Stored Procedure)
-	manually run a procedure that archives transactions older than 7 days
+	manually run a procedure that archives transactions older than 30 days
+	*** LOCATION: inc_adminFunctions
+	*** FUNCTION NAME: function archiveTransaction()
+	
+	DROP PROCEDURE IF EXISTS archiveTransaction;
+	DELIMITER //
+	CREATE PROCEDURE archiveTransaction()
+	BEGIN
+		INSERT INTO archive(accid, username, acctype, transtype, amount, toid, date)
+			SELECT accid, username, acctype, transtype, amount, toid, curdate()
+			FROM transaction;
+		UPDATE transaction set updatedat = CURDATE();
+	END //
+	DELIMITER ;
+	
 	
 13.	Delete Inactive Checking/Savings Accounts (Admin)
-	delete all Ch/Sa accounts that have $0 balance and have not been accessed in 60 days
+	delete all Ch/Sa accounts that have $0 balance and have not been accessed in 90 days
 	this delete will cascade through the Transactions table
-
+	DELIMITER //
+		CREATE TRIGGER deleteInactive
+		AFTER INSERT ON log
+		FOR EACH ROW BEGIN
+			DELETE from users
+			WHERE username IN
+			(SELECT username
+				FROM log
+				GROUP BY username
+				HAVING max(logindate) + INTERVAL 90 DAY < CURDATE()) and username IN 
+					(SELECT username
+						FROM account
+						GROUP BY username
+						HAVING sum(balance) = 0);
+		END //
+		DELIMITER ;
+		
+		
 14.	Increase Credit Card Limit (Admin)
-
-15.	Daily Transactions Tally (Admin)
-	show the sum of all deposits and withdraws for one day
+	DROP PROCEDURE IF EXISTS increaseCCLimit;
+	DELIMITER //
+	CREATE PROCEDURE increaseCCLimit(IN amount DOUBLE)
+	BEGIN
+		SELECT c.username , c.maxlimit, sum(a.balance) as totalbalance
+		FROM account a right join creditcard c on a.username=c.username
+		GROUP BY username
+		HAVING totalbalance > amount;
+	END //
+	DELIMITER ;
 	
-STORED PROCEDURE
-DROP PROCEDURE IF EXISTS getLowBalance;
-DELIMITER //
-CREATE PROCEDURE getLowBalance()
-BEGIN
-SELECT username, acctype, balance
-FROM account
-where balance <= 200;
-END //
-DELIMITER;
+15.	Monthly Transactions Tally (Admin)
+	show the sum of all deposits and withdraws for one month
+	DROP PROCEDURE IF EXISTS monthlyDeposit;
+	DELIMITER //
+	CREATE PROCEDURE monthlyDeposit(IN aDate DATE)
+	BEGIN
+		SELECT SUM(amount) as total
+		FROM transaction
+		WHERE transtype='Deposit' and MONTH(transdate)=MONTH(aDate) and YEAR(transdate)=YEAR(aDate);
+	END //
+	DELIMITER ;
+	
+	
+		
+16. Display User Transactions Sorted By Date
+	getChecking($username);
+    getSavings($username);
+    getCredit($username);
+    getLoan($username);

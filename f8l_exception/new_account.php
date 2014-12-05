@@ -28,27 +28,12 @@ function openNewAccount($userName,$balance,$accountType) {
             $SQLstring = "INSERT INTO account (username,balance,acctype) 
 				VALUES ('$userName','$balance','$accountType')";
             $result = queryMysql($SQLstring);
+            $sql2 = "INSERT INTO transaction(username, transtype, toID, acctype, amount)
+                         SELECT username, 'New Account', accID, '$accountType', '$balance' FROM account WHERE 
+                         username='$userName'";
+                
+            $result = queryMysql($sql2);
         }
-        /*
-	if ($db_connect === FALSE)
-		echo "<p>Unable to connect to the database server.</p>" . "<p>Error code " . mysql_errno() . ": " . mysql_error() . "</p>";
-		
-	else {
-		if (!@mysql_select_db($db_name, $db_connect))
-			echo "<p>Connection error. Please try again later.</p>";
-		else {
-			//$today = date("Ymd");
-			//echo "sending insert query now.<br />";
-			$SQLstring = "INSERT INTO account (username,balance,acctype) 
-				VALUES ('$userName','$balance','$accountType')";
-			
-			$QueryResult = @mysql_query($SQLstring, $db_connect);
-		}
-		mysql_close($db_connect);
-	}
-	return ($retval);
-         * 
-         */
 }
 
 function displayForm() {
@@ -81,7 +66,7 @@ else {
 	// check if user has already opened 2-account limit
 	$numAccounts = getNumberOfAccounts($userName);
 	if ($numAccounts > 1) {
-		echo "You already have two accounts open. Each user is limited to two accounts.<br />";
+		echo "<div class='error'>You already have two accounts open. Each user is limited to two accounts.</div>";
 		$showForm = FALSE;
 	}
 
@@ -93,7 +78,7 @@ else {
 			$accountType  = $_POST['accountType'];
 	
 			if($balance < 0) {
-				$errorMessage .= "You cannot open a new account with a negative balance.<br />";
+				$errorMessage .= "<div class='error'>You cannot open a new account with a negative balance.</div>";
 				$errorCount++;
 			}
 			if ($errorCount == 0)

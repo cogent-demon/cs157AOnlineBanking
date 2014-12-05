@@ -17,20 +17,44 @@ include 'functions.php';
 function showAccounts($userName) {
 	// Select database.
         $result = queryMysql("SELECT * from account WHERE username='$userName'");
+        
         if ($result->num_rows == 0){
-            echo "<p>You have no accounts open.</p>";
+            echo "<div class='error'><p>You have no accounts open.</p></div>";
         } else {
             echo "<table width='50%' border='1'>";
             echo "<tr>
                     <th>Account Type</th>
                     <th>Account Number</th>
                     <th>Balance</th>
+                    <th>Interest Rate</th>
+                    <th>Minimum Payment</th>
                     </tr>";
             $num = $result->num_rows;
             for ($j = 0; $j < $num; $j++){
                 $row = $result->fetch_array(MYSQLI_ASSOC);
-                echo "<tr><td>" . $row['username'] . "</td><td>" . $row['acctype'] . "</td><td>$ " . number_format($row['balance'], 2, '.', ',') . "</td></tr>";
+                echo "<tr><td>" . $row['acctype'] . "</td><td>" . $row['accid'] . "</td><td>$ " . number_format($row['balance'], 2, '.', ',') . "</td></tr>";
             }
+            
+            //Get Loan Info
+            $result = queryMysql("SELECT * from loan WHERE username='$userName'");
+            if ($result->num_rows > 0){
+                $num = $result->num_rows;
+                for ($j = 0; $j < $num; $j++){
+                    $row = $result->fetch_array(MYSQLI_ASSOC);
+                    echo "<tr><td>" . $row['acctype'] . "</td><td>" . $row['loanid'] . "</td><td>$ " . number_format($row['balance'], 2, '.',',') . "</td><td>$" . $row['interestrate'] . "</td></tr>";
+                }
+            }
+            
+            //Get Credit Card Info
+            $result = queryMysql("SELECT * from creditcard WHERE username='$userName'");
+            if ($result->num_rows > 0){
+                $num = $result->num_rows;
+                for ($j = 0; $j < $num; $j++){
+                    $row = $result->fetch_array(MYSQLI_ASSOC);
+                    echo "<tr><td>" . $row['acctype'] . "</td><td>" . $row['creditid'] . "</td><td>$ " . number_format($row['balance'], 2, '.',',') . "</td><td>$" . $row['interestRate'] . "</td></tr>";
+                }
+            }
+            echo "</table>";
             $result->close();
         }
 }

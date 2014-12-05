@@ -29,7 +29,7 @@ if (isset($_POST['Submit'])){
     $password  = validateInput($_POST['pass'],"Password");
     //Check if there is an error on userName and/or password.
     if ($errorMessage == ""){
-        $result = queryMysql("SELECT username,password FROM Users WHERE username='$userName' AND password='$password'");
+        $result = queryMysql("SELECT username,password FROM admin WHERE username='$userName' AND password='$password'");
         $num = $result->num_rows;
         
         if ($result->num_rows == 0)
@@ -46,5 +46,7 @@ echo <<<_END
 	<p>Password <input type="password" name="pass" /></p>
 	<p><input type="submit" name="Submit" value="Log in" /></p>
     </form>
+    </body>
+    </html>
 _END;
 ?>

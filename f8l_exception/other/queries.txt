@@ -1,0 +1,27 @@
+// See # of Checking, Savings, Credit Card, and Loan Accounts
+select acctype, count(*) from(
+select username,acctype from account
+union
+select username, acctype from creditcard
+union
+select username,acctype from loan) acl
+group by acctype
+
+// Stored Procedure Log
+DELIMITER //
+CREATE PROCEDURE logUser(IN user VARCHAR(30))
+BEGIN
+INSERT INTO log(username) VALUES(user);
+END //
+DELIMITER ;
+
+// Stored Procedure Low Balance
+DROP PROCEDURE IF EXISTS getLowBalance;
+DELIMITER //
+CREATE PROCEDURE getLowBalance(IN num DOUBLE)
+BEGIN
+SELECT username, acctype, balance
+FROM account
+where balance <= num;
+END //
+DELIMITER ;

@@ -40,13 +40,13 @@ function transfer($userName,$fromAccountId,$toAccountId,$amount) {
                 $sql3 = "UPDATE account SET balance=balance+'$amount' WHERE accID='$toAccountId'";
                 $result = queryMysql($sql3);
                 
-                $sql2 = "INSERT INTO transaction(username, transtype, toID, acctype, amount)
-                         SELECT username, 'Transfer', '$toAccountId', acctype, '$amount' FROM account WHERE 
+                $sql2 = "INSERT INTO transaction(username, accid, transtype, toID, acctype, amount)
+                         SELECT username, '$fromAccountId','Transfer', '$toAccountId', acctype, '$amount' FROM account WHERE 
                          accID='$fromAccountId'";
                 $result = queryMysql($sql2);
 
-                $sql2 = "INSERT INTO transaction(username, transtype, toID, acctype, amount)
-                         SELECT username, 'Transfer', accid, acctype, '$amount' FROM account WHERE 
+                $sql2 = "INSERT INTO transaction(username, accid, transtype, toID, acctype, amount)
+                         SELECT username, '$fromAccountId','Transfer', accid, acctype, '$amount' FROM account WHERE 
                          accID='$toAccountId'";
                 $result = queryMysql($sql2);
                 

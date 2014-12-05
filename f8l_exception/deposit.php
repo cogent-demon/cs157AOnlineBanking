@@ -36,8 +36,8 @@ function deposit($userName,$accountId,$amount) {
                 $sql2 = "UPDATE account SET balance=balance+'$amount' WHERE username='$userName' and accID='$accountId'";
                 $result = queryMysql($sql2);
                 
-                $sql2 = "INSERT INTO transaction(username, transtype, toID, acctype, amount)
-                         SELECT username, 'Deposit', accID, acctype, '$amount' FROM account WHERE 
+                $sql2 = "INSERT INTO transaction(username, accid, transtype, toID, acctype, amount)
+                         SELECT username, NULL, 'Deposit', accid, acctype, '$amount' FROM account WHERE 
                          accID='$accountId'";
                 
                 $result = queryMysql($sql2);
@@ -57,9 +57,9 @@ function displayForm() {
 	global $errorMessage;
 	echo $errorMessage ?>
 	<form method="POST" action="deposit.php">
-		<p>Account Number: <input type="text" name="accountNumber" /></p>
-		<p>Deposit Amount: <input type="amount" name="amount" /></p>
-		<p><input type="submit" name="Submit" value="Submit" /></p>
+            <p>Account Number: <input type="text" name="accountNumber" /></p>
+            <p>Deposit Amount: <input type="amount" name="amount" /></p>
+            <p><input type="submit" name="Submit" value="Submit" /></p>
 	</form>
 	<br /><br />
 	
@@ -79,7 +79,6 @@ echo "User Name: ".$userName."<br />";
 if (isset($_POST['Submit'])) {
 	$accountNumber  = validateInput($_POST['accountNumber'],"Account Number");
 	$amount  = validateInput($_POST['amount'],"Deposit Amount");
-	
 	if ($errorCount == 0)
 		$showForm = FALSE;
 	else
