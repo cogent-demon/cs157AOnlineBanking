@@ -231,8 +231,6 @@ F8L Exception -- 15 Functions:
 	END //
 	DELIMITER ;
 	
-	
-		
 16. Display User Transactions Sorted By Date
 	getChecking($username);
     getSavings($username);
