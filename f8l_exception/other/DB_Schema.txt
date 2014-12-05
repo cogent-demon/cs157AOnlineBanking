@@ -29,43 +29,48 @@ CREATE TABLE transaction (transID INT AUTO_INCREMENT PRIMARY KEY,
 	FOREIGN KEY(username) REFERENCES users(username)
 	ON DELETE CASCADE);
 	
-CREATE TABLE creditcard (accID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE creditcard (creditid INT AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(30) NOT NULL,
 	balance FLOAT(15,2),
 	minPayment FLOAT(15,2),
 	interestRate FLOAT(15,2),
 	maxLimit FLOAT(15,2),
 	paymentDueDate DATE,
-	paymentDate TIMESTAMP,
+	paymentdate TIMESTAMP,
+	acctype VARCHAR(30),
+	dateopened DATE,
 	FOREIGN KEY(username) REFERENCES users(username)
 	ON DELETE CASCADE);
 
-CREATE TABLE loan (accID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE loan (loanid INT AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(30) NOT NULL,
 	amount FLOAT (15,2),
 	balance FLOAT (15,20),
-	interestRate FLOAT (15,2),
-	paymentDueDate DATE,
-	paymentDate TIMESTAMP,
+	interestrate FLOAT (15,2),
+	paymentduedate DATE,
+	paymentdate TIMESTAMP,
+	dateopened DATE,
+	acctype VARCHAR(30),
 	FOREIGN KEY (username) REFERENCES users(username)
 	ON DELETE CASCADE);
 	
-CREATE TABLE transactionarchive (transID INT AUTO_INCREMENT PRIMARY KEY,
-	accID INT,
+CREATE TABLE archive (accID INT,
 	username VARCHAR(30),
 	acctype VARCHAR(30),
 	transtype VARCHAR(30),
 	amount FLOAT (15,2),
 	toID INT,
-	transdate TIMESTAMP,
-	FOREIGN KEY(username) REFERENCES users(username)
-	ON DELETE CASCADE);
+	date DATE);
 	
 CREATE TABLE log (
-username varchar(30),
+username VARCHAR(30),
 logindate TIMESTAMP,
 FOREIGN KEY(username) REFERENCES users (username)
 ON DELETE cascade);
+
+CREATE TABLE admin(
+username VARCHAR(30),
+password VARCHAR(30));
 
 // Users: Andy, Brad, Clint, Danny, Elvis, Fred, George, Henry, Isabel, John, Keira, Larry, Mick, Nancy, Paul, Ringo, Stan, Tom, Violet, Warren
 
